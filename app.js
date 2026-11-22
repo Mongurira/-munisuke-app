@@ -242,6 +242,16 @@
   window.addEventListener('resize', fitText);
   render();
 
+  /* ================= ムニスケ(タップでジャンプ) ================= */
+  const muni = document.getElementById('munisuke');
+  muni.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    muni.classList.remove('jump');
+    void muni.offsetWidth; // アニメーションを最初から再生
+    muni.classList.add('jump');
+  });
+  muni.addEventListener('animationend', () => muni.classList.remove('jump'));
+
   /* ================= オフライン対応 ================= */
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     navigator.serviceWorker.register('sw.js').catch(() => {});

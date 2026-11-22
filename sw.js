@@ -1,6 +1,6 @@
 // オフラインでも使えるようにファイルをキャッシュする
 // ファイルを更新したら CACHE の番号を上げてください
-const CACHE = 'munisuke-calc-v1';
+const CACHE = 'munisuke-calc-v2';
 const FILES = [
   './',
   './index.html',
@@ -11,6 +11,7 @@ const FILES = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/favicon-32.png',
+  './images/munisuke.png',
 ];
 
 self.addEventListener('install', (e) => {
