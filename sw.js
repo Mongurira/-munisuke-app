@@ -1,6 +1,6 @@
 // オフラインでも使えるようにファイルをキャッシュする
 // ファイルを更新したら CACHE の番号を上げてください
-const CACHE = 'munisuke-calc-v2';
+const CACHE = 'munisuke-calc-v3';
 const FILES = [
   './',
   './index.html',
