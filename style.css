@@ -51,8 +51,31 @@ body { overflow: hidden; }
 /* ---------- 時計 ---------- */
 .clock {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vmin, 24px);
   text-align: center;
-  padding: clamp(8px, 2vmin, 24px) 0 clamp(4px, 1vmin, 12px);
+  padding: clamp(4px, 1vmin, 12px) 0 0;
+}
+
+.munisuke {
+  flex: 0 0 auto;
+  height: clamp(110px, 20vmin, 230px);
+  width: auto;
+  pointer-events: auto;
+  cursor: pointer;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+  -webkit-user-drag: none;
+}
+
+.munisuke.jump { animation: jump 0.5s ease; }
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30% { transform: translateY(-18%) rotate(-6deg); }
+  60% { transform: translateY(0) rotate(4deg); }
+  80% { transform: translateY(-5%) rotate(0); }
 }
 
 .clock-date {
@@ -154,6 +177,7 @@ body { overflow: hidden; }
   .app { max-width: 760px; }
   .clock { padding: 0; }
   .clock-time { font-size: clamp(48px, 10vmin, 110px); }
+  .munisuke { height: clamp(90px, 16vmin, 170px); }
   .key { font-size: clamp(22px, 3.8vmin, 44px); }
   .key.op, .key.eq { font-size: clamp(26px, 4.6vmin, 52px); }
   .result { font-size: clamp(40px, 7vmin, 80px); }
