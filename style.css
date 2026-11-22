@@ -1,0 +1,160 @@
+:root {
+  --bg: #1c1c22;
+  --panel: #26262e;
+  --text: #f5f5f7;
+  --muted: #a1a1aa;
+  --key: #3a3a44;
+  --key-active: #5a5a66;
+  --fn: #a5a5b0;
+  --fn-text: #1c1c22;
+  --fn-active: #d4d4dc;
+  --op: #ff9f0a;
+  --op-active: #ffc46b;
+  --op-selected-bg: #f5f5f7;
+  --accent: #ffd36b;
+  --gap: clamp(10px, 1.6vmin, 18px);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Segoe UI", sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+body { overflow: hidden; }
+
+.app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding:
+    max(16px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  gap: var(--gap);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ---------- 時計 ---------- */
+.clock {
+  flex: 0 0 auto;
+  text-align: center;
+  padding: clamp(8px, 2vmin, 24px) 0 clamp(4px, 1vmin, 12px);
+}
+
+.clock-date {
+  color: var(--muted);
+  font-size: clamp(16px, 2.6vmin, 28px);
+  letter-spacing: 0.05em;
+}
+
+.clock-time {
+  font-size: clamp(56px, 12vmin, 140px);
+  font-weight: 200;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.clock-time .sec {
+  font-size: 0.45em;
+  color: var(--muted);
+  margin-left: 0.1em;
+}
+
+/* ---------- 電卓 ---------- */
+.calc {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  background: var(--panel);
+  border-radius: 28px;
+  padding: var(--gap);
+}
+
+.display {
+  flex: 0 0 auto;
+  text-align: right;
+  padding: 4px 12px 0;
+  overflow: hidden;
+}
+
+.expr {
+  color: var(--muted);
+  font-size: clamp(18px, 3vmin, 30px);
+  min-height: 1.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+}
+
+.result {
+  font-size: clamp(48px, 9vmin, 110px);
+  font-weight: 300;
+  line-height: 1.1;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.keys {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: var(--gap);
+}
+
+.key {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: var(--key);
+  color: var(--text);
+  font: inherit;
+  font-size: clamp(26px, 4.6vmin, 52px);
+  font-weight: 400;
+  min-height: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.12s, color 0.12s;
+}
+
+.key:active, .key.pressed { background: var(--key-active); }
+
+.key.fn { background: var(--fn); color: var(--fn-text); font-size: clamp(22px, 3.8vmin, 44px); }
+.key.fn:active, .key.fn.pressed { background: var(--fn-active); }
+
+.key.op, .key.eq { background: var(--op); color: #fff; font-size: clamp(30px, 5.4vmin, 60px); }
+.key.op:active, .key.op.pressed,
+.key.eq:active, .key.eq.pressed { background: var(--op-active); }
+.key.op.selected { background: var(--op-selected-bg); color: var(--op); }
+
+.key.zero { grid-column: span 2; text-align: left; padding-left: 0.95em; }
+
+/* 横向き(iPad 横置き)でも時計は上。電卓は横に広がりすぎないよう幅を抑える */
+@media (orientation: landscape) {
+  .app { max-width: 760px; }
+  .clock { padding: 0; }
+  .clock-time { font-size: clamp(48px, 10vmin, 110px); }
+  .key { font-size: clamp(22px, 3.8vmin, 44px); }
+  .key.op, .key.eq { font-size: clamp(26px, 4.6vmin, 52px); }
+  .result { font-size: clamp(40px, 7vmin, 80px); }
+}
